@@ -1,0 +1,36 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: superset-gateway
+  namespace: cartosi
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "superset-cartosi.urba.univ-lille.fr"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: superset-virtualservice
+  namespace: cartosi
+spec:
+  hosts:
+    - "superset-cartosi.urba.univ-lille.fr"
+  gateways:
+    - superset-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: superset
+            port:
+              number: 8088

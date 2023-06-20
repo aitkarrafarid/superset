@@ -1,0 +1,8 @@
+$ http://apache.github.io/superset/
+$ helm repo update
+$ helm search repo superset
+$ helm search repo superset -l
+Ralph
+$ helm upgrade --install superset -f ./helm/superset/values.yaml superset/superset --version=0.8.10 --create-namespace --namespace ralph
+cartosi
+helm upgrade --install superset -f ./helm/superset/values.yaml superset/superset --version=0.10.2 --create-namespace --namespace cartosi

@@ -264,10 +264,11 @@ supersetNode:
     # redis_password: superset
     redis_port: "6379"
     # You need to change below configuration incase bringing own PostgresSQL instance and also set postgresql.enabled:false
-    db_host: '{{ template "superset.fullname" . }}-postgresql'
+#    db_host: '{{ template "superset.fullname" . }}-postgresql'
+    db_host: 'cartosi-db.cartosi.svc.cluster.local'
     db_port: "5432"
-    db_user: superset
-    db_pass: superset
+    db_user: postgres
+    db_pass: postgres
     db_name: superset
   env: {}
   # -- If true, forces deployment to reload on each upgrade
@@ -711,7 +712,7 @@ postgresql:
   ##
   ## Use the PostgreSQL chart dependency.
   ## Set to false if bringing your own PostgreSQL.
-  enabled: true
+  enabled: false
 
   ## Authentication parameters
   auth:
@@ -735,10 +736,10 @@ postgresql:
     persistence:
       ##
       ## Enable PostgreSQL persistence using Persistent Volume Claims.
-      enabled: true
+      enabled: false
       ##
       ## Persistent class
-      # storageClass: classname
+      storageClass: nfs-client
       ##
       ## Access modes:
       accessModes:
